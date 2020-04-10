@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 })
 
 // checked - get specific project by id .get(id)
-router.get("/:id", validate, (req, res) => {
+router.get("/:id", validateProject, (req, res) => {
   Projects.get(req.params.id)
     .then(projectFound => {
       res.status(200).json(projectFound);
@@ -25,7 +25,7 @@ router.get("/:id", validate, (req, res) => {
 });
 
 // checked - get a specific project's actions by id .getProjectActions(projectId)
-router.get("/:id/actions", validate, (req, res) => {
+router.get("/:id/actions", validateProject, (req, res) => {
   Projects.getProjectActions(req.params.id)
     .then(actionsFound => {
       res.status(200).json(actionsFound);
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
 });
 
 // checked - update a project by id .update(id, changes)
-router.put("/:id", validate, (req, res) => {
+router.put("/:id", validateProject, (req, res) => {
   Projects.update(req.project.id, req.body)
     .then(changes => {
       res.status(200).json(changes);
@@ -58,7 +58,7 @@ router.put("/:id", validate, (req, res) => {
 });
 
 // checked - delete a project by id .remove(id)
-router.delete("/:id", validate, (req, res) => {
+router.delete("/:id", validateProject, (req, res) => {
   Projects.remove(req.project.id)
     .then(count => {
       res.status(200).json({ message: "This project has been nuked" });
@@ -69,7 +69,7 @@ router.delete("/:id", validate, (req, res) => {
 });
 
 // checked - post a new action to a project
-router.post("/:id/actions", validate, (req, res) => {
+router.post("/:id/actions", validateProject, (req, res) => {
   const actionWithProjectId = {
     ...req.body,
     project_id: req.project.id
@@ -83,8 +83,8 @@ router.post("/:id/actions", validate, (req, res) => {
     });
 });
 
-// checked - validate project id
-function validate(req, res, next) {
+// checked - validate project id exists
+function validateProject(req, res, next) {
   Projects.get(req.params.id)
     .then(projectFound => {
       if (projectFound) {

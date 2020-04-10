@@ -40,13 +40,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+How to use middleware and setup routing.
+
 - [ ] Describe Middleware?
+
+Middleware can be used for various reasons, but I would generally describe it as running checks on a request before returning a response. Sometimes middleware can directly send back a response based on conditions being met or unmet.
 
 - [ ] Describe a Resource?
 
+A resource is anything that can be used, modified or added to our database.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+Status codes for the response and any data that correlates to that request.
+
 - [ ] How can we partition our application into sub-applications?
+
+By setting up routes for separate resources we can have our endpoints and middleware in files that are neatly organized and easy to find.
 
 ## Minimum Viable Product
 
